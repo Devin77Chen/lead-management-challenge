@@ -1,0 +1,6 @@
+[{"_id":1, "name":"Plumbing", "parent_category_id":0},
+ {"_id":2, "name":"Electrical", "parent_category_id":0},
+ {"_id":3, "name":"Carpentry", "parent_category_id":0},
+ {"_id":4, "name":"Handyman", "parent_category_id":0},
+ {"_id":5, "name":"Building", "parent_category_id":0},
+ {"_id":6, "name":"Bathroom Renovation", "parent_category_id":5}]

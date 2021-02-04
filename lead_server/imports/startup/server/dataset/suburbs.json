@@ -1,0 +1,5 @@
+[{"_id":1, "name":"Sydney", "postcode":"2000"},
+ {"_id":2, "name":"Bondi", "postcode":"2026"},
+ {"_id":3, "name":"Manly", "postcode":"2095"},
+ {"_id":4, "name":"Surry Hills", "postcode":"2010"},
+ {"_id":5, "name":"Newtown", "postcode":"2042"}]
