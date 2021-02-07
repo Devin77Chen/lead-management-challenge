@@ -1,4 +1,6 @@
 {
   "name": "lead_rn",
-  "displayName": "lead_rn"
+  "displayName": "lead_rn",
+  "HomeTabOneName": "Invited",
+  "HomeTabTwoName": "Accepted"
 }
