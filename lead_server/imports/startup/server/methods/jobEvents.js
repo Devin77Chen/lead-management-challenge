@@ -3,7 +3,7 @@ import { JobEvents } from '../collections/jobEvents';
 import { Job_Status } from '../utils/consts/job_status';
 import { Job_Event_Types } from '../utils/consts/job_event_types';
 import { Error_Types } from '../utils/consts/error_types';
-import { buildJobEvent, buildJobEventsView } from '../utils/helpers/jobEvents';
+import { buildJobEvent } from '../utils/helpers/jobEvents';
 import user from '../dataset/user';
 
 Meteor.methods({
