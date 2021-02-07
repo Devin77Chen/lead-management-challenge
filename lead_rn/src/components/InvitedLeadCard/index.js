@@ -37,8 +37,30 @@ function InvitedLeadCard({
             <JobDescription description={description} />
             <CardItem bordered>
                 <Body style={themes.row}>
-                    <AcceptButton jobID={jid} onButtonPress={() => acceptJob(Meteor.call, Methods.ACCEPT_JOB, jid) }/>
-                    <DeclineButton jobID={jid} onButtonPress={() => declineJob(Meteor.call, Methods.DECLINE_JOB, jid) }/>
+                    <AcceptButton 
+                        jobID={jid} 
+                        onButtonPress={() => acceptJob(Meteor.call, Methods.ACCEPT_JOB, jid, (err, result) => {
+                            if (err) {
+                                // TODO handle accept job error gracefully with proper user interface
+                                console.log("acceptJob error", err);
+                            } else {
+                                // TODO show successful accept alert
+                                console.log(`Job ${jid} is accepted.`);
+                            }
+                        })}
+                    />
+                    <DeclineButton 
+                        jobID={jid} 
+                        onButtonPress={() => declineJob(Meteor.call, Methods.DECLINE_JOB, jid, (err, result) => {
+                            if (err) {
+                                // TODO handle decline job error gracefully with proper user interface
+                                console.log("declineJob error", err);
+                            } else {
+                                // TODO show successful decline alert
+                                console.log(`Job ${jid} is declined.`);
+                            }
+                        })}
+                    />
                     <Text style={{ ...themes.boldText, marginRight: 5 }}>${price}</Text>
                     <Text style={themes.secondaryText}>Lead Invitation</Text>
                 </Body>
