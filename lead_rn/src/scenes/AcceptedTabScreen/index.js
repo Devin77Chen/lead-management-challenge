@@ -2,13 +2,13 @@ import React from 'react';
 import { FlatList } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import { Container } from 'native-base';
+import PropTypes from 'prop-types';
 import AcceptedLeadCard from '@components/AcceptedLeadCard';
 import { Collections } from '@consts/collections';
 import { Views } from '@consts/views';
 import { buildLeads } from '@helpers/jobEventsViews';
 
 function AcceptedTabScreen({ leads }) {
-    console.log("🚀 ~ file: index.js ~ line 9 ~ AcceptedTabScreen ~ leads", leads)
     return (
         <Container>
             <FlatList 
@@ -46,6 +46,10 @@ function AcceptedTabScreen({ leads }) {
             />
         </Container>
     );
+}
+
+AcceptedTabScreen.propTypes = {
+    leads: PropTypes.array
 }
 
 export default withTracker(() => {

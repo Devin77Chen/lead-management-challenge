@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardItem, Body, Text, View, Icon, Button } from 'native-base';
 import Meteor from 'react-native-meteor';
+import PropTypes from 'prop-types';
 import AvatarNameTime from './AvatarNameTime';
 import SuburbPostcode from './SuburbPostcode';
 import JobCategory from './JobCategory';
@@ -67,6 +68,18 @@ function InvitedLeadCard({
             </CardItem>
         </Card>
     )
+}
+
+InvitedLeadCard.propTypes = {
+    jid: PropTypes.string,
+    category_name: PropTypes.string,
+    contact_name: PropTypes.string,
+    created_at: PropTypes.object,
+    description: PropTypes.string,
+    price: PropTypes.number,
+    suburb_name: PropTypes.string,
+    postcode: PropTypes.string
+
 }
 
 export default InvitedLeadCard;

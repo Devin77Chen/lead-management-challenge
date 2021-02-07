@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardItem, Body, Text, View } from 'native-base';
-import Meteor from 'react-native-meteor';
+import PropTypes from 'prop-types';
 import AvatarNameTime from '../InvitedLeadCard/AvatarNameTime';
 import SuburbPostcode from '../InvitedLeadCard/SuburbPostcode';
 import JobCategory from '../InvitedLeadCard/JobCategory';
@@ -9,6 +9,7 @@ import JobDescription from '../InvitedLeadCard/JobDescription';
 import Email from './Email';
 import Phone from './Phone';
 import themes from '@themes';
+
 
 function AcceptedLeadCard({
     jid,
@@ -22,7 +23,6 @@ function AcceptedLeadCard({
     contact_email,
     contact_phone
 }) {
-    console.log("🚀 ~ file: index.js ~ line 25 ~ contact_phone", contact_phone)
     return (
         <Card style={themes.card}>
             <AvatarNameTime name={contact_name} time={created_at} />
@@ -48,6 +48,19 @@ function AcceptedLeadCard({
             </CardItem>
         </Card>
     )
+}
+
+AcceptedLeadCard.propTypes = {
+    jid: PropTypes.string,
+    category_name: PropTypes.string,
+    contact_name: PropTypes.string,
+    created_at: PropTypes.object,
+    description: PropTypes.string,
+    price: PropTypes.number,
+    suburb_name: PropTypes.string,
+    postcode: PropTypes.string,
+    contact_email: PropTypes.string,
+    contact_phone: PropTypes.string
 }
 
 export default AcceptedLeadCard;

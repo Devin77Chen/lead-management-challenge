@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Icon, Text } from 'native-base';
+import PropTypes from 'prop-types';
 import themes from '@themes';
 
 function JobCategory({ categoryName }) {
@@ -9,6 +10,10 @@ function JobCategory({ categoryName }) {
             <Text style={themes.secondaryText}>{categoryName}</Text>
         </View>
     )
+}
+
+JobCategory.propTypes = {
+    categoryName: PropTypes.string
 }
 
 export default JobCategory;

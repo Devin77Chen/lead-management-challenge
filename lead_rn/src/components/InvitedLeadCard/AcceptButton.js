@@ -1,6 +1,7 @@
 import React from 'react';
 import { Alert } from 'react-native';
 import { Text, Button } from 'native-base';
+import PropTypes from 'prop-types';
 import themes from '@themes';
 
 function AcceptButton({ onButtonPress }) {
@@ -25,6 +26,10 @@ function AcceptButton({ onButtonPress }) {
             <Text>Accept</Text>
         </Button>
     )
+}
+
+AcceptButton.propTypes = {
+    onButtonPress: PropTypes.func
 }
 
 export default AcceptButton;

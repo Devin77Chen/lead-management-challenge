@@ -12,6 +12,5 @@ Meteor.publish(Publications.MY_SUBURBS, function() {
         const { suburb_id } = data || {};
         return suburb_id;
     })
-    console.log(`Subscribing ${Publications.MY_SUBURBS}`);
     return Suburbs.find({ _id: { $in: suburbsIDs }  });;
 });

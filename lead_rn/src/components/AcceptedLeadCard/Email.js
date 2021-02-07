@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Linking } from 'react-native';
-import { View, Icon, Text, Touch } from 'native-base';
-import call from 'react-native-phone-call';
+import { Icon, Text } from 'native-base';
+import PropTypes from 'prop-types';
 import themes from '@themes';
 
 function Email({ email }) {
@@ -20,6 +20,10 @@ function Email({ email }) {
             <Text style={{ color: themes.primaryColor }}>{email}</Text>
         </TouchableOpacity>
     )
+}
+
+Email.propTypes = {
+    email: PropTypes.string
 }
 
 export default Email;

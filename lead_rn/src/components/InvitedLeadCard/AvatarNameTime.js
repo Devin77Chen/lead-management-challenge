@@ -1,6 +1,7 @@
 import React from 'react';
 import { CardItem, Body, Text } from 'native-base';
 import Avatar from 'react-native-user-avatar';
+import PropTypes from 'prop-types';
 import { parseDate, monthNames } from '@helpers/formatTime';
 import themes from '@themes';
 
@@ -16,6 +17,11 @@ function AvatarNameTime({ name, time }) {
             </Body>
         </CardItem>
     )
+}
+
+AvatarNameTime.propTypes = {
+    name: PropTypes.string,
+    time: PropTypes.object
 }
 
 export default AvatarNameTime;

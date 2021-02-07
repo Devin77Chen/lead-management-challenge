@@ -2,6 +2,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { View, Icon, Text, Touch } from 'native-base';
 import call from 'react-native-phone-call';
+import PropTypes from 'prop-types';
 import themes from '@themes';
 
 function Phone({ phoneNumber }) {
@@ -20,6 +21,10 @@ function Phone({ phoneNumber }) {
             <Text style={{ color: themes.primaryColor }}>{phoneNumber}</Text>
         </TouchableOpacity>
     )
+}
+
+Phone.propTypes = {
+    phoneNumber: PropTypes.string
 }
 
 export default Phone;

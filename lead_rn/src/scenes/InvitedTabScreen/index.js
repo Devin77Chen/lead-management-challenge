@@ -2,6 +2,7 @@ import React from 'react';
 import { FlatList } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import { Container, Header, Body, Title } from 'native-base';
+import PropTypes from 'prop-types';
 import InvitedLeadCard from '@components/InvitedLeadCard';
 import { Collections } from '@consts/collections';
 import { Views } from '@consts/views';
@@ -9,7 +10,6 @@ import { Job_Event_Types } from '@consts/job_event_types';
 import { buildLeads } from '@helpers/jobEventsViews';
 
 function InvitedTabScreen({ leads }) {
-    console.log("🚀 ~ file: index.js ~ line 9 ~ InvitedTabScreen ~ leads", leads)
     return (
         <Container>
             <FlatList 
@@ -25,7 +25,6 @@ function InvitedTabScreen({ leads }) {
                         price,
                         suburb
                     } = item || {};
-                    console.log("🚀 ~ file: index.js ~ line 26 ~ InvitedTabScreen ~ contact_name_firstxx", contact_name_first)
                     const { name: category_name } = category || {};
                     const { name: suburb_name, postcode } = suburb || {};
                     return (
@@ -44,6 +43,10 @@ function InvitedTabScreen({ leads }) {
             />
         </Container>
     );
+}
+
+InvitedTabScreen.propTypes = {
+    leads: PropTypes.array
 }
 
 export default withTracker(() => {
