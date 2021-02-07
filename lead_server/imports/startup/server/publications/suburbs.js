@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Publications } from '../utils/consts/publications';
-import { JobEvents } from '../collections/jobevents';
+import { JobEvents } from '../collections/jobEvents';
 import { Suburbs } from '../collections/suburbs';
 // User is used to mock a logged-in user
 import User from '../dataset/user';
@@ -12,5 +12,6 @@ Meteor.publish(Publications.MY_SUBURBS, function() {
         const { suburb_id } = data || {};
         return suburb_id;
     })
-    return Suburbs.find({ _id: { $in: suburbsIDs }  });
+    console.log(`Subscribing ${Publications.MY_SUBURBS}`);
+    return Suburbs.find({ _id: { $in: suburbsIDs }  });;
 });
