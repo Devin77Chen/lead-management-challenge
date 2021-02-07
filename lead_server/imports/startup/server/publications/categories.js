@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Publications } from '../utils/consts/publications';
-import { JobEvents } from '../collections/jobevents';
+import { JobEvents } from '../collections/jobEvents';
 import { Categories } from '../collections/categories';
 // User is used to mock a logged-in user
 import User from '../dataset/user';
@@ -12,5 +12,6 @@ Meteor.publish(Publications.MY_CATEGORIES, function() {
         const { category_id } = data || {};
         return category_id;
     })
-    return Categories.find({ _id: { $in: categoriesIDs }  });
+    console.log(`Subscribing ${Publications.MY_CATEGORIES}`);
+    return Categories.find({ _id: { $in: categoriesIDs }  });;
 });
