@@ -60,7 +60,7 @@ Open a new terminal window, change the directory to *./lead_rn*:
   * jid
   * jobDetails
   * timestamp
-  
+
   A history array is not built to save the history of user interactions to a certain job as a user can only accept or decline a job in the system. Only the final status of a job for a user is returned in jobDetails.
 
   There are four collections exist on client side: `Categories`, `Suburbs`, `JobEventsInvited` and `JobEventsAccepted`. Foreign key queries to get categories and suburbs data happen on client side.
@@ -90,7 +90,7 @@ Cavy. https://github.com/pixielabs/cavy
 Detox. https://github.com/wix/detox/
 
 # TODOS
-Due to the time constraint, the following features are treated as improvements for this project:
+The following features are treated as improvements for this project:
   1. Error Boundary. Wrap components that have a higher risk of crashing into a custom error boundary component to handle component crashing gracefully.
   1. Authentications flow. Authentications flow is not yet implemented. A logged-in user is mocked in both the server and the react native app.
   1. A Github submodule/npm package could be set up to share utilities(the utils folder) that are used in both the server and the app. Now they are declared separately.
