@@ -1,11 +1,11 @@
 # Solution Stack
 * **Database: MongoDB**
   1. **Horizontal scale support**
-    *More cost-effective compared to traditional SQL databases when needing to scale to serve large volumes of data and traffic.*
+     *More cost-effective compared to traditional SQL databases when needing to scale to serve large volumes of data and traffic.*
   1. **Mobile app query and caching support** 
-    *Performant mobile app database queries and caching are enabled by Minimongo.*
+     *Performant mobile app database queries and caching are enabled by Minimongo.*
   1. **GeoSearch support**
-    *This API makes it easier to query geolocation data on either server side or client side. For example, for future development, job invites are sent to tradies who only work in certain suburbs/distance.*
+     *This API makes it easier to query geolocation data on either server side or client side. For example, for future development, job invites are sent to tradies who only work in certain suburbs/distance.*
 
 * **Server: MeteorJS**
   *Meteor has a built-in MongoDB support and uses a publish-subscribe pattern to automatically propagate data changes to clients(similar to socket.io). If users accept a job invite and they have a good connection to the server, they can see the job moved from the invited tab screen to the accepted tab screen immediately. (Optimistic UI/Offline requests will be discussed separately below)*
