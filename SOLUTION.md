@@ -60,6 +60,7 @@ Open a new terminal window, change the directory to *./lead_rn*:
   * jid
   * jobDetails
   * timestamp
+  
   A history array is not built to save the history of user interactions to a certain job as a user can only accept or decline a job in the system. Only the final status of a job for a user is returned in jobDetails.
 
   There are four collections exist on client side: `Categories`, `Suburbs`, `JobEventsInvited` and `JobEventsAccepted`. Foreign key queries to get categories and suburbs data happen on client side.
