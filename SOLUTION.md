@@ -8,7 +8,7 @@
      *This API makes it easier to query geolocation data on either server side or client side. For example, for future development, job invites are sent to tradies who only work in certain suburbs/distance.*
 
 * **Server: MeteorJS.** 
-  *Meteor has a built-in MongoDB support and uses a publish-subscribe pattern to automatically propagate data changes to clients(similar to socket.io). If users accept a job invite and they have a good connection to the server, they can see the job moved from the invited tab screen to the accepted tab screen immediately. (Optimistic UI/Offline requests will be discussed separately below)*
+  *Meteor has a built-in MongoDB support and uses a publish-subscribe pattern to automatically propagate data changes to clients(similar to socket.io). If users accept a job invite and they have a good connection to the server, they can see the job moved from the invited tab screen to the accepted tab screen immediately.
 
 * **Client: React Native.** 
   *Write once and run on both iOS and Android.*
