@@ -4,14 +4,12 @@
  * @param  {string} name Method name
  * @param  {string} jid Job ID
  */
-export const acceptJob = (caller, name, jid) => {
+export const acceptJob = (caller, name, jid, callback) => {
     caller(name, jid, (err, result) => {
         if (err) {
-            // TODO handle accept job error gracefully with proper user interface
-            console.log("acceptJob error", err);
+            callback(err, null);
         } else {
-            // TODO show successful accept alert
-            console.log(`Job ${jid} is accepted.`);
+            callback(null, result);
         }
     });
 };
@@ -22,14 +20,12 @@ export const acceptJob = (caller, name, jid) => {
  * @param  {string} name Method name
  * @param  {string} jid Job ID
  */
-export const declineJob = (caller, name, jid) => {
+export const declineJob = (caller, name, jid, callback) => {
     caller(name, jid, (err, result) => {
         if (err) {
-            // TODO handle decline job error gracefully with proper user interface
-            console.log("declineJob error", err);
+            callback(err, null);
         } else {
-            // TODO show successful decline alert
-            console.log(`Job ${jid} is declined.`);
+            callback(null, result);
         }
     });
 };
