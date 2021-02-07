@@ -1,11 +1,10 @@
 # Solution Stack
 * **Database: MongoDB**
-  1. Horizontal scale support
-  
+  1. **Horizontal scale support**
     *More cost-effective compared to traditional SQL databases when needing to scale to serve large volumes of data and traffic.*
-  1. Mobile app query and caching support 
+  1. **Mobile app query and caching support** 
     *Performant mobile app database queries and caching are enabled by Minimongo.*
-  1. GeoSearch support
+  1. **GeoSearch support**
     *This API makes it easier to query geolocation data on either server side or client side. For example, for future development, job invites are sent to tradies who only work in certain suburbs/distance.*
 
 * **Server: MeteorJS**
