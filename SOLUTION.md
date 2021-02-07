@@ -23,10 +23,10 @@ Please have the following dependencies installed in your environment:
 * React Native - v0.63.4.+. Check https://reactnative.dev/docs/environment-setup for install information.
 ## 2. Start the map server
 Open a new terminal window, change the directory to *./lead_server*:
-  1. Install the dependencies.
-    `meteor npm install`
-  1. Start the server.
-    `meteor`
+  1. Install the dependencies. Run: 
+    `meteor npm install` 
+  1. Start the server. Run: 
+    `meteor` 
 Note: The meteor server start point is ./lead_server/server/main.js. The imports directory is used to support Js imports syntax which is not generally supported in other directories. 
 ## 3. Start the lead managment react native app
 Open a new terminal window, change the directory to *./lead_rn*:
