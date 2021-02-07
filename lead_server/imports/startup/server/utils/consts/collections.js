@@ -1,5 +1,5 @@
 const Collections = Object.freeze({
-    JOB_EVENTS: 'jobevents',
+    JOB_EVENTS: 'jobEvents',
     CATEGORIES: 'categories',
     SUBURBS: 'suburbs'
 });
