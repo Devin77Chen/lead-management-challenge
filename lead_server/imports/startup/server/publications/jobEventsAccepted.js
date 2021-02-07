@@ -10,13 +10,11 @@ Meteor.publish(Publications.MY_ACCEPTED_JOB_EVENTS, buildAggregator(
     JobEvents, 
     () => {
         const { username } = user;
-        console.log('subscribing MY_ACCEPTED_JOB_EVENTS', username);
-        // TODO only return the jobs that the user is interested in, filtered by categories or suburbs
-        // TODO pagination - use a variable to limit only returning the first [limit] of job events
+        // TODO pagination - use a variable to limit to only return the first [limit] of job events
         return [
             { 
                 $match: {
-                    author: username,   // ideally, this should be userID
+                    author: username,   // Ideally, this should be a userID
                     'data.status': Job_Status.ACCEPTED
                 } 
             },
@@ -31,6 +29,6 @@ Meteor.publish(Publications.MY_ACCEPTED_JOB_EVENTS, buildAggregator(
     }, 
     {
         collectionName: Views.JOB_EVENTS_ACCEPTED,
-        republishOnChange: () => JobEvents.find({})
+        republishOnChange: () => JobEvents.find({})     // TODO only query on jobs that the user is interested in. Passed in a selector to filter the results.
     })
 );
