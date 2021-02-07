@@ -61,6 +61,10 @@ export const insertJobEventsData = (JobEvents, JobEventsArr, log, logError) => {
         });
 }
 
+/**
+ * format job events with a given job list
+ * @param  {array} jobs The job list
+ */
 export const buildJobEvents = (jobs = []) => {
     if (!Array.isArray(jobs) || jobs.length < 1) return [];
     return jobs.reduce((jobEvents, job) => {
