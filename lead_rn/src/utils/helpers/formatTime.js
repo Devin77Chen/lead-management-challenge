@@ -2,6 +2,11 @@ export const monthNames = ["January", "February", "March", "April", "May", "June
   "July", "August", "September", "October", "November", "December"
 ];
 
+/**
+ * parse a date with a defined format to be rendered on screen
+ * @param  {Date} date
+ * @param  {array} monthNames
+ */
 export const parseDate = (date, monthNames) => {
     if (typeof date !== 'object') return {};
     const hours = date.getHours();
