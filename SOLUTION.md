@@ -1,6 +1,7 @@
 # Solution Stack
 * **Database: MongoDB**
   1. Horizontal scale support
+  
     *More cost-effective compared to traditional SQL databases when needing to scale to serve large volumes of data and traffic.*
   1. Mobile app query and caching support 
     *Performant mobile app database queries and caching are enabled by Minimongo.*
