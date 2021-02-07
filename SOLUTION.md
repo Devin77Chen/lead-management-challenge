@@ -44,7 +44,7 @@ Open a new terminal window, change the directory to *./lead_rn*:
   1. Test data from *./lead_server/imports/startup/server/dataset* which simulates real-world data are dumped into the server database when the server gets started.
   1. Authentication flow is not implemented in either the server or the mobile app. A hard-coded test user(Devin Chen, as saved in `~/dataset/user.json`) has logged in both to the mobile app and the server.
 ## 2. Data Management Pattern
-  Event Sourcing and CQRS patterns are implemented to manage data flow in this project.
+  Event Sourcing and CQRS patterns are implemented to manage the data flow in this project.
   There are three collections created in the server database: `JobEvents`, `Categories` and `Suburbs`. 
 
   The command model is built and saved in `JobEvents` with the following structure:
