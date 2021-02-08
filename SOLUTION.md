@@ -21,7 +21,7 @@ Please have the following dependencies installed in your environment:
 * Meteor - v1.12.0.+. Check https://www.meteor.com/install for install information.
 * Node - v14.15.+. Check https://nodejs.org/en/download/ for install information.
 * React Native - v0.63.4.+. Check https://reactnative.dev/docs/environment-setup for install information.
-## 2. Start the map server
+## 2. Start the server
 Open a new terminal window, change the directory to *./lead_server*:
   1. Install the dependencies. Run: 
     `meteor npm install` 
