@@ -65,7 +65,7 @@ Open a new terminal window, change the directory to *./lead_rn*:
 
   There are four collections exist on client side: `Categories`, `Suburbs`, `JobEventsInvited` and `JobEventsAccepted`. Foreign key queries to get categories and suburbs data happen on client side.
 
-  Critical Thinking: A new job can be distributed to multiple tradies. A tradie can accept or decline a job. Once a job is accepted by a tradie, the job becomes unavailable/invisible immediately to the other tradies. If a job is declined by a tradie, the job only disappears in their invited job list. This implementaion is done in the `.~/publications/jobEventsAccept` aggregation function.
+  Critical Thinking: A new job can be distributed to multiple tradies. A tradie can accept or decline a job. Once a job is accepted by a tradie, the job becomes unavailable/invisible immediately to the other tradies. If a job is declined by a tradie, the job only disappears in their own invited job list. This implementaion is done in the `.~/publications/jobEventsAccept` aggregation function.
 ## 3. Client Server Data Communications
   Client server data communications are based on Meteor's methods(*./lead_server/imports/startup/server/methods*) and the built-in publication/subscription pattern.
   Realtime data are automatically synced to subscribers.
