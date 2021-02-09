@@ -12,6 +12,5 @@ Meteor.publish(Publications.MY_CATEGORIES, function() {
         const { category_id } = data || {};
         return category_id;
     })
-    console.log(`Subscribing ${Publications.MY_CATEGORIES}`);
     return Categories.find({ _id: { $in: categoriesIDs }  });;
 });

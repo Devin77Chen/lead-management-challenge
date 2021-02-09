@@ -21,13 +21,8 @@ function Home() {
         Meteor.subscribe(Publications.MY_SUBURBS);
         Meteor.subscribe(Publications.MY_CATEGORIES);
         Meteor.subscribe(Publications.MY_INVITED_JOB_EVENTS);
-        console.log('subscribing ', Publications.MY_INVITED_JOB_EVENTS);
         Meteor.subscribe(Publications.MY_ACCEPTED_JOB_EVENTS);
-        console.log('subscribing ', Publications.MY_ACCEPTED_JOB_EVENTS);
     }, []);
-    // console.log("🚀 ~ file: index.js ~ line 26 ~ useEffect ~ MY_SUBURBS", Meteor.collection(SUBURBS).find());
-    // console.log("🚀 ~ file: index.js ~ line 26 ~ useEffect ~ MY_CATEGORIES", Meteor.collection(CATEGORIES).find());
-    // console.log("🚀 ~ file: index.js ~ line 26 ~ useEffect ~ MY_JOB_EVENTS", Meteor.collection(JOB_EVENTS).find());
     return (
         <Tab.Navigator
             tabBarOptions={{
