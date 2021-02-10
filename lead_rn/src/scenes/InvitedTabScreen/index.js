@@ -52,7 +52,7 @@ InvitedTabScreen.propTypes = {
 export default withTracker(() => {
     const suburbs = Meteor.collection(Collections.SUBURBS).find();
     const categories = Meteor.collection(Collections.CATEGORIES).find();
-    const invitedJobEvents = Meteor.collection(Views.JOB_EVENTS_INVITED).find();
+    const invitedJobEvents = Meteor.collection(Views.JOB_EVENTS_INVITED).find({}, { sort: { timestamp: -1 } });
     const leads = buildLeads(suburbs, categories, invitedJobEvents);
     return {
         leads
