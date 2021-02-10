@@ -5,12 +5,12 @@
  * @param  {object} data The job data
  * @param  {string} author The user name who creates the job event
  */
-export const buildJobEvent = (jid, type, data, author) => {
+export const buildJobEvent = (jid, type, data, author, created_at) => {
     return {
         jid,
         type,
         data,
         author,
-        timestamp: new Date()
+        timestamp: new Date(created_at)
     };
 }

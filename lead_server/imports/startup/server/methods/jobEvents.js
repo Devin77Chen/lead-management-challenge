@@ -19,7 +19,7 @@ Meteor.methods({
         if (jobAcceptEvent) throw new Meteor.Error(Error_Types.JOB_ALREADY_ACCEPTED, "The job was already accepted.");
         const { data } = jobCreateEvent;
         const updatedData = { ...data, status: Job_Status.ACCEPTED };
-        const event = buildJobEvent(jid, Job_Event_Types.UPDATE, updatedData, username);
+        const event = buildJobEvent(jid, Job_Event_Types.UPDATE, updatedData, username, new Date());
         const insertJobEvent = new Promise((resolve, reject) => {
             JobEvents.insert(event, (err, result) => {
                 if (err) {
@@ -48,11 +48,11 @@ Meteor.methods({
         const jobCreateEvent = JobEvents.findOne({ jid, type: Job_Event_Types.CREATE });
         if (!jobCreateEvent) throw new Meteor.Error(Error_Types.INVALID_OPERATION, "Invalid operations. Please contact admins. [aj2]");
         // The job was already declined by me
-        const jobDeclineEvent = JobEvents.findOne({ jid, type: Job_Event_Types.UPDATE, 'data.status': Job_Status.DECLINED });
+        const jobDeclineEvent = JobEvents.findOne({ jid, type: Job_Event_Types.UPDATE, 'data.status': Job_Status.DECLINED, username });
         if (jobDeclineEvent) throw new Meteor.Error(Error_Types.JOB_ALREADY_ACCEPTED, "The job was already declined.");
         const { data } = jobCreateEvent;
         const updatedData = { ...data, status: Job_Status.DECLINED };
-        const event = buildJobEvent(jid, Job_Event_Types.UPDATE, updatedData, username);
+        const event = buildJobEvent(jid, Job_Event_Types.UPDATE, updatedData, username, new Date());
         const insertJobEvent = new Promise((resolve, reject) => {
             JobEvents.insert(event, (err, result) => {
                 if (err) {

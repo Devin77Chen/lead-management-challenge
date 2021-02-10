@@ -91,7 +91,7 @@ export const buildJobEvents = (jobs = []) => {
             price,
             description
         };
-        const jobEvent = buildJobEvent(jid, Job_Event_Types.CREATE, data, contact_name);
+        const jobEvent = buildJobEvent(jid, Job_Event_Types.CREATE, data, contact_name, created_at);
         return jobEvents.concat(jobEvent);
     }, []);
 }
