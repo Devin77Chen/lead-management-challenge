@@ -21,7 +21,7 @@ function AvatarNameTime({ name, time }) {
 
 AvatarNameTime.propTypes = {
     name: PropTypes.string,
-    time: PropTypes.object
+    time: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ])
 }
 
 export default AvatarNameTime;

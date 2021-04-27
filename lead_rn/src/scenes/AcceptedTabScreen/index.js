@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { FlatList } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import { Container } from 'native-base';
@@ -9,6 +10,7 @@ import { Views } from '@consts/views';
 import { buildLeads } from '@helpers/jobEventsViews';
 
 function AcceptedTabScreen({ leads }) {
+    console.log("🚀 ~ file: index.js ~ line 13 ~ AcceptedTabScreen ~ leads", leads)
     return (
         <Container>
             <FlatList 
@@ -24,7 +26,8 @@ function AcceptedTabScreen({ leads }) {
                         price,
                         suburb,
                         contact_phone,
-                        contact_email
+                        contact_email,
+                        isOffline
                     } = item || {};
                     const { name: category_name } = category || {};
                     const { name: suburb_name, postcode } = suburb || {};
@@ -40,6 +43,7 @@ function AcceptedTabScreen({ leads }) {
                             postcode={postcode}
                             contact_phone={contact_phone}
                             contact_email={contact_email}
+                            isOffline={isOffline}
                         />
                     )
                 }}
@@ -52,12 +56,25 @@ AcceptedTabScreen.propTypes = {
     leads: PropTypes.array
 }
 
-export default withTracker(() => {
+const AcceptedTabScreenContainer = withTracker(({ offlineAcceptedLeads }) => {
     const suburbs = Meteor.collection(Collections.SUBURBS).find();
     const categories = Meteor.collection(Collections.CATEGORIES).find();
     const acceptedJobEvents = Meteor.collection(Views.JOB_EVENTS_ACCEPTED).find({}, { sort: { timestamp: -1 } });
     const leads = buildLeads(suburbs, categories, acceptedJobEvents);
     return {
-        leads
+        leads: offlineAcceptedLeads.concat(leads)
     }
 })(AcceptedTabScreen);
+
+const mapStateToProps = ({ offline }) => {
+    const { outbox } = offline || {};
+    return {
+        offlineAcceptedLeads: outbox.reduce((offlineLeads, { type, payload }) => {
+            const { lead } = payload || {};
+            if (type === 'ACCEPT_LEAD') return offlineLeads.concat({ ...lead, isOffline: true })
+            return offlineLeads;
+        }, [])
+    }
+}
+
+export default connect(mapStateToProps)(AcceptedTabScreenContainer);

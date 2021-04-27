@@ -1,3 +1,4 @@
+import { uniqBy } from 'lodash';
 /**
  * build a lead array from a jobEvent list to be rendered on screen
  * @param  {array} suburbs Suburbs collection data
@@ -6,7 +7,7 @@
  */
 export const buildLeads = (suburbs, categories, jobEvents) => {
     if (!Array.isArray(suburbs) || !Array.isArray(categories) || !Array.isArray(jobEvents)) return [];
-    return jobEvents.reduce((leads, jobEvent) => {
+    const leads = jobEvents.reduce((leads, jobEvent) => {
         const { jid, timestamp, jobDetails } = jobEvent || {};
         const { 
             status, 
@@ -32,8 +33,9 @@ export const buildLeads = (suburbs, categories, jobEvents) => {
             description,
             price,
             contact_phone,
-            contact_email
+            contact_email,
         }
         return leads.concat(lead);
     }, []);
+    return uniqBy(leads, 'jid');
 }

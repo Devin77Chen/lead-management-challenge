@@ -1,7 +1,7 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import logger from 'redux-logger';
 import { offline } from '@redux-offline/redux-offline';
-import offlineConfig from '@redux-offline/redux-offline/lib/defaults';
+import offlineConfig from '@configs/reduxOffline';
 import reducers from '@reducers';
 
 const composeEnhancers = compose(

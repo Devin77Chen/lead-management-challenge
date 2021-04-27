@@ -7,7 +7,9 @@ export const monthNames = ["January", "February", "March", "April", "May", "June
  * @param  {Date} date
  * @param  {array} monthNames
  */
-export const parseDate = (date, monthNames) => {
+export const parseDate = (myDate, monthNames) => {
+    let date = myDate;
+    if (typeof myDate === 'string') date = new Date(myDate);
     if (typeof date !== 'object') return {};
     const hours = date.getHours();
     const trailing = hours >= 12 ? 'pm' : 'am';

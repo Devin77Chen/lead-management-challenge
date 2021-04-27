@@ -1,20 +1,15 @@
 import React, { useEffect } from 'react';
 import Meteor from 'react-native-meteor';
-import { Container, Header, Body, Title } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import InvitedTabScreen from '@scenes/InvitedTabScreen';
 import AcceptedTabScreen from '@scenes/AcceptedTabScreen';
 
 import { Publications } from '@consts/publications';
-import { Collections } from '@consts/collections';
-// import { Provider } from "react-redux";
-// import { store } from "@redux/store";
-// import HomeContent from "@components/HomeContent";
 import appConfigs from 'lead_rn/app.json';
-import MeteorListView from 'react-native-meteor/src/components/ListView';
 
-function Home() {
+function Home(props) {
+    console.log("🚀 ~ file: index.js ~ line 12 ~ Home ~ props", props)
     const Tab = createMaterialTopTabNavigator();
     const insets = useSafeAreaInsets();
     useEffect(() => {

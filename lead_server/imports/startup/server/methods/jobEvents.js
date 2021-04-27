@@ -38,6 +38,7 @@ Meteor.methods({
             // we return a generic error information with a number for us to retrieve the error
             throw new Meteor.Error(500, "Internal server error. Please contact admins. [aj3]")
         }
+        console.log("Job id", jid, "is accepted.");
         return result;
     },
     declineJob: async function(jid) {

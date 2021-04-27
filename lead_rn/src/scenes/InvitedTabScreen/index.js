@@ -1,5 +1,6 @@
-import React from 'react';
-import { FlatList } from 'react-native';
+import React, { useEffect } from 'react';
+import { FlatList, DeviceEventEmitter } from 'react-native';
+import { connect } from 'react-redux';
 import Meteor, { withTracker } from 'react-native-meteor';
 import { Container, Header, Body, Title } from 'native-base';
 import PropTypes from 'prop-types';
@@ -8,8 +9,14 @@ import { Collections } from '@consts/collections';
 import { Views } from '@consts/views';
 import { Job_Event_Types } from '@consts/job_event_types';
 import { buildLeads } from '@helpers/jobEventsViews';
+import { acceptJob, declineJob } from '@methods/jobEventsRequests';
+import { Methods } from '@consts/methods';
+import store from '../../store';
+function InvitedTabScreen({ leads, isServerConnected }) {
+    useEffect(() => {
+        DeviceEventEmitter.emit('serverConnectionChange', isServerConnected);
+    }, [isServerConnected])
 
-function InvitedTabScreen({ leads }) {
     return (
         <Container>
             <FlatList 
@@ -37,6 +44,17 @@ function InvitedTabScreen({ leads }) {
                             price={price}
                             suburb_name={suburb_name}
                             postcode={postcode}
+                            onAcceptButtonPress={() => store.dispatch({
+                                type: 'ACCEPT_LEAD',
+                                payload: { lead: item },
+                                meta: {
+                                    offline: {
+                                        effect: { URI: Methods.ACCEPT_JOB, method: 'METEOR' },
+                                        commit: { type: 'ACCEPT_LEAD_COMMIT', meta: { jid } },
+                                        rollback: { type: 'ACCEPT_LEAD_ROLLBACK', meta: { jid } }
+                                    }
+                                }
+                            })}
                         />
                     )
                 }}
@@ -49,12 +67,26 @@ InvitedTabScreen.propTypes = {
     leads: PropTypes.array
 }
 
-export default withTracker(() => {
+const InvitedTabScreenContainer = withTracker(({ offlineAcceptedLeadIds }) => {
     const suburbs = Meteor.collection(Collections.SUBURBS).find();
     const categories = Meteor.collection(Collections.CATEGORIES).find();
     const invitedJobEvents = Meteor.collection(Views.JOB_EVENTS_INVITED).find({}, { sort: { timestamp: -1 } });
     const leads = buildLeads(suburbs, categories, invitedJobEvents);
     return {
-        leads
+        leads: leads.filter(lead => !offlineAcceptedLeadIds.includes(lead.jid) ),
+        isServerConnected: Meteor.status().connected
     }
 })(InvitedTabScreen);
+
+const mapStateToProps = ({ offline }) => {
+    const { outbox } = offline || {};
+    return {
+        offlineAcceptedLeadIds: outbox.reduce((ids, { type, payload }) => {
+            const { lead } = payload || {};
+            if (type === 'ACCEPT_LEAD') return ids.concat(lead.jid)
+            return ids;
+        }, [])
+    }
+}
+
+export default connect(mapStateToProps)(InvitedTabScreenContainer);

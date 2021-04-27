@@ -4,15 +4,17 @@
  * @param  {string} name Method name
  * @param  {string} jid Job ID
  */
-export const acceptJob = (caller, name, jid, callback) => {
+export const acceptJob = (caller, name, jid) => new Promise((resolve, reject) => {
+    console.log('accepting job jid', jid);
     caller(name, jid, (err, result) => {
         if (err) {
-            callback(err, null);
+            reject(err);
         } else {
-            callback(null, result);
+            resolve(result)
         }
     });
-};
+
+});
 
 /**
  * decline the job, update the status to the server.

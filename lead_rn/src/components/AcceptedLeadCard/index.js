@@ -21,10 +21,11 @@ function AcceptedLeadCard({
     suburb_name,
     postcode,
     contact_email,
-    contact_phone
+    contact_phone,
+    isOffline
 }) {
     return (
-        <Card style={themes.card}>
+        <Card style={isOffline? themes.offlineCard : themes.card}>
             <AvatarNameTime name={contact_name} time={created_at} />
             <CardItem bordered>
                 <Body>
@@ -60,7 +61,8 @@ AcceptedLeadCard.propTypes = {
     suburb_name: PropTypes.string,
     postcode: PropTypes.string,
     contact_email: PropTypes.string,
-    contact_phone: PropTypes.string
+    contact_phone: PropTypes.string,
+    isOffline: PropTypes.bool
 }
 
 export default AcceptedLeadCard;

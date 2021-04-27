@@ -11,6 +11,7 @@ import AcceptButton from './AcceptButton';
 import DeclineButton from './DeclineButton';
 import { acceptJob, declineJob } from '@methods/jobEventsRequests';
 import { Methods } from '@consts/methods';
+import store from '../../store';
 import themes from '@themes';
 
 function InvitedLeadCard({
@@ -21,7 +22,8 @@ function InvitedLeadCard({
     description,
     price,
     suburb_name,
-    postcode
+    postcode,
+    onAcceptButtonPress
 }) {
     return (
         <Card style={themes.card}>
@@ -40,15 +42,7 @@ function InvitedLeadCard({
                 <Body style={themes.row}>
                     <AcceptButton 
                         jobID={jid} 
-                        onButtonPress={() => acceptJob(Meteor.call, Methods.ACCEPT_JOB, jid, (err, result) => {
-                            if (err) {
-                                // TODO handle accept job error gracefully with proper user interface
-                                console.log("acceptJob error", err);
-                            } else {
-                                // TODO show successful accept alert
-                                console.log(`Job ${jid} is accepted.`);
-                            }
-                        })}
+                        onButtonPress={() => onAcceptButtonPress()}
                     />
                     <DeclineButton 
                         jobID={jid} 
@@ -78,8 +72,8 @@ InvitedLeadCard.propTypes = {
     description: PropTypes.string,
     price: PropTypes.number,
     suburb_name: PropTypes.string,
-    postcode: PropTypes.string
-
+    postcode: PropTypes.string,
+    onAcceptButtonPress: PropTypes.func
 }
 
 export default InvitedLeadCard;
