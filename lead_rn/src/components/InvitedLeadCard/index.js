@@ -23,10 +23,11 @@ function InvitedLeadCard({
     price,
     suburb_name,
     postcode,
+    isOffline,
     onAcceptButtonPress
 }) {
     return (
-        <Card style={themes.card}>
+        <Card style={isOffline? themes.offlineCard : themes.card}>
             <AvatarNameTime name={contact_name} time={created_at} />
             <CardItem bordered>
                 <Body>
@@ -73,7 +74,8 @@ InvitedLeadCard.propTypes = {
     price: PropTypes.number,
     suburb_name: PropTypes.string,
     postcode: PropTypes.string,
-    onAcceptButtonPress: PropTypes.func
+    onAcceptButtonPress: PropTypes.func,
+    isOffline: PropTypes.bool
 }
 
 export default InvitedLeadCard;

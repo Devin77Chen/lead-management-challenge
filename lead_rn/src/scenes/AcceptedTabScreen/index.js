@@ -10,7 +10,6 @@ import { Views } from '@consts/views';
 import { buildLeads } from '@helpers/jobEventsViews';
 
 function AcceptedTabScreen({ leads }) {
-    console.log("🚀 ~ file: index.js ~ line 13 ~ AcceptedTabScreen ~ leads", leads)
     return (
         <Container>
             <FlatList 
@@ -62,7 +61,7 @@ const AcceptedTabScreenContainer = withTracker(({ offlineAcceptedLeads }) => {
     const acceptedJobEvents = Meteor.collection(Views.JOB_EVENTS_ACCEPTED).find({}, { sort: { timestamp: -1 } });
     const leads = buildLeads(suburbs, categories, acceptedJobEvents);
     return {
-        leads: offlineAcceptedLeads.concat(leads)
+        leads
     }
 })(AcceptedTabScreen);
 

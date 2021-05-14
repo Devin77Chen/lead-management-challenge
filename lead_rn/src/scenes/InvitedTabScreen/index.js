@@ -12,7 +12,9 @@ import { buildLeads } from '@helpers/jobEventsViews';
 import { acceptJob, declineJob } from '@methods/jobEventsRequests';
 import { Methods } from '@consts/methods';
 import store from '../../store';
+import { uniqBy } from 'lodash';
 function InvitedTabScreen({ leads, isServerConnected }) {
+    console.log("🚀 ~ file: index.js ~ line 16 ~ InvitedTabScreen ~ leads", leads)
     useEffect(() => {
         DeviceEventEmitter.emit('serverConnectionChange', isServerConnected);
     }, [isServerConnected])
@@ -30,7 +32,8 @@ function InvitedTabScreen({ leads, isServerConnected }) {
                         description,
                         jid,
                         price,
-                        suburb
+                        suburb,
+                        isOffline
                     } = item || {};
                     const { name: category_name } = category || {};
                     const { name: suburb_name, postcode } = suburb || {};
@@ -44,17 +47,21 @@ function InvitedTabScreen({ leads, isServerConnected }) {
                             price={price}
                             suburb_name={suburb_name}
                             postcode={postcode}
-                            onAcceptButtonPress={() => store.dispatch({
-                                type: 'ACCEPT_LEAD',
-                                payload: { lead: item },
-                                meta: {
-                                    offline: {
-                                        effect: { URI: Methods.ACCEPT_JOB, method: 'METEOR' },
-                                        commit: { type: 'ACCEPT_LEAD_COMMIT', meta: { jid } },
-                                        rollback: { type: 'ACCEPT_LEAD_ROLLBACK', meta: { jid } }
+                            isOffline={isOffline}
+                            onAcceptButtonPress={() => {
+                                // Meteor.collection(Views.JOB_EVENTS_INVITED).remove({ jid });
+                                store.dispatch({
+                                    type: 'ACCEPT_LEAD',
+                                    payload: { lead: item },
+                                    meta: {
+                                        offline: {
+                                            effect: { URI: Methods.ACCEPT_JOB, method: 'METEOR' },
+                                            commit: { type: 'ACCEPT_LEAD_COMMIT', meta: { jid } },
+                                            rollback: { type: 'ACCEPT_LEAD_ROLLBACK', meta: { jid } }
+                                        }
                                     }
-                                }
-                            })}
+                                })
+                            }}
                         />
                     )
                 }}
@@ -67,13 +74,19 @@ InvitedTabScreen.propTypes = {
     leads: PropTypes.array
 }
 
-const InvitedTabScreenContainer = withTracker(({ offlineAcceptedLeadIds }) => {
+const InvitedTabScreenContainer = withTracker(({ offlineAcceptedLeads }) => {
     const suburbs = Meteor.collection(Collections.SUBURBS).find();
     const categories = Meteor.collection(Collections.CATEGORIES).find();
     const invitedJobEvents = Meteor.collection(Views.JOB_EVENTS_INVITED).find({}, { sort: { timestamp: -1 } });
-    const leads = buildLeads(suburbs, categories, invitedJobEvents);
+    const interimLeads = buildLeads(suburbs, categories, invitedJobEvents);
+    const leads = uniqBy(offlineAcceptedLeads.concat(interimLeads), 'jid');
     return {
-        leads: leads.filter(lead => !offlineAcceptedLeadIds.includes(lead.jid) ),
+        leads: leads.map(lead => {
+            if (offlineAcceptedLeads.map(({ jid }) => jid).includes(lead.jid)) {
+                return { ...lead, isOffline: true }
+            }
+            return lead
+        }),
         isServerConnected: Meteor.status().connected
     }
 })(InvitedTabScreen);
@@ -81,10 +94,10 @@ const InvitedTabScreenContainer = withTracker(({ offlineAcceptedLeadIds }) => {
 const mapStateToProps = ({ offline }) => {
     const { outbox } = offline || {};
     return {
-        offlineAcceptedLeadIds: outbox.reduce((ids, { type, payload }) => {
+        offlineAcceptedLeads: outbox.reduce((offlineLeads, { type, payload }) => {
             const { lead } = payload || {};
-            if (type === 'ACCEPT_LEAD') return ids.concat(lead.jid)
-            return ids;
+            if (type === 'ACCEPT_LEAD') return offlineLeads.concat({ ...lead, isOffline: true })
+            return offlineLeads;
         }, [])
     }
 }
